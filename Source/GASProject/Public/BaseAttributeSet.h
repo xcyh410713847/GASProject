@@ -17,6 +17,12 @@ class GASPROJECT_API UBaseAttributeSet : public UAttributeSet
 public:
 	UBaseAttributeSet();
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "BaseAttributeSet")
+		FGameplayAttributeData Attack;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "BaseAttributeSet")
+		FGameplayAttributeData Armor;
+
 	/** ÉúÃüÖµ */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "BaseAttributeSet")
 		FGameplayAttributeData Health;
