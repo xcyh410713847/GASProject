@@ -8,7 +8,10 @@ ABaseCharacter::ABaseCharacter()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+	
+	AbilitySystemComponent = CreateDefaultSubobject<UAbilitySystemComponent>("AbilitySystemComponent");
 
+	AttributeSet = CreateDefaultSubobject<UBaseAttributeSet>("AttributeSet");
 }
 
 // Called when the game starts or when spawned
@@ -32,3 +35,16 @@ void ABaseCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 }
 
+UAbilitySystemComponent* ABaseCharacter::GetAbilitySystemComponent() const
+{
+	return AbilitySystemComponent;
+}
+
+void ABaseCharacter::AquireAbility(TSubclassOf<UBaseGameplayAbility> Ability)
+{
+	if (AbilitySystemComponent && Ability)
+	{
+		AbilitySystemComponent->GiveAbility(FGameplayAbilitySpec(Ability));
+		AbilitySystemComponent->InitAbilityActorInfo(this, this);
+	}
+}
